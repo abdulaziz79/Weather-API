@@ -20,7 +20,7 @@ class App extends Component {
       name: "abdulazi Issa Abdulrahman",
     };
   }
-  
+
 
   handleInputChange = value => {
     this.setState({ name: value });
@@ -31,14 +31,14 @@ class App extends Component {
     return (
       <div className="app">
         <Nav />
-        <CurrentWeather />
-      
-       <WeatherToday/>
-       
+        <CurrentWeather /> 
+
+        <WeatherToday />
+
       </div>
     );
   }
-  
+
 }
 
 
