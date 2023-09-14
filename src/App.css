@@ -16,12 +16,13 @@ nav {
   text-align: left;
   
 }
-button{
-  background-color: #5879c7;
-  height: 40px;
-  width:150px;
-  margin-left: 80px;
-  border: 0px;
+.btn{
+    background-color: #5879c7;
+    height: 3rem;
+    width: 5rem;
+    margin-left: 2rem;
+    border: 0px;
+
 }
 
 header {
@@ -81,6 +82,7 @@ h3 {
   justify-content: center;
   text-align: center;
   color: rgb(0, 0, 0);
+  margin-bottom: 2rem;
   margin-top: 1rem;
   margin-bottom: 2rem;
 }
