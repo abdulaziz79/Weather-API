@@ -1,11 +1,17 @@
 import React from "react";
+import { useState } from "react";
  
-function Nav() {
+function Nav(props) {
+    const [input,setInput]=useState("")
+    const handleButtonClick = () => {
+        console.log("Button in child component was clicked!");
+        
+      }
     return (
         <header>
         <label for="search" ></label>
-        <input type="text" id="name" name="name" placeholder="Enter the city" />
-        <button className="btn">FIND WEATHER</button>
+        <input type="text" id="name" name="name" placeholder="Enter the city" onChange={e=>setInput(e.target.value)} />
+        <button className="btn" onClick={()=>props.setCity(input)} >FIND WEATHER</button>
         </header>
     )
 }

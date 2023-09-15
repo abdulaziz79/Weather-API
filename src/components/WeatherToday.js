@@ -3,14 +3,14 @@ import mostlycloudy from './../img/weather-icons/mostlycloudy.svg'
 import clear from './../img/weather-icons/clear.svg'
 
 
-function WeatherToday({fake}){
+function WeatherToday({data}){
   {
-    fake.list.map((e) => {
-      console.log(e.dt_txt);
+    data.list.map((e) => {
+      
     })
   }
 
-  const getData=fake.list.slice(5,11);
+  const getData=data.list.slice(1);
 
   return (
 
@@ -20,16 +20,12 @@ function WeatherToday({fake}){
       {getData.map((e) => {
         let hours= e.dt_txt.split(" ")
         return (
-          // <article className="footer">
-          //   <p className="weatherItem">{hours[1].slice(0,5)}</p>
-          //   <img className="imgItem" src={clear} alt="weatherImag"  />
-          //   <span className="temp">{parseInt(e.main.temp -273.15)}&deg;C </span>
-          // </article>
+      
           
           <article className="wheatherItem">
              <p>{hours[1].slice(0,5)}</p>
              <img className="imgItem" src={clear}></img>
-             <p>{parseInt(e.main.temp -273.15)}&deg;C</p>
+             <p>{parseInt(e.main.temp )}&deg;C</p>
          </article>
         )
       })}
