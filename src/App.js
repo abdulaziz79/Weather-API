@@ -13,33 +13,19 @@ import CurrentWeather from "./components/CurrentWeather";
 import WeatherToday from "./components/WeatherToday";
 import FakeWeather from "./FakeWeather.json"
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "abdulazi Issa Abdulrahman",
-    };
-  }
-
-
-  handleInputChange = value => {
-    this.setState({ name: value });
-  };
-
-  render() {
-    console.log(FakeWeather);
-    return (
-      <div className="app">
-        <Nav />
-        <CurrentWeather /> 
-
-        <WeatherToday />
-
-      </div>
-    );
-  }
-
+let fake = FakeWeather
+console.log(fake)
+// console.log(FakeWeather)
+function App() {
+  return (
+    <div className="app">
+      <Nav />
+      <main>
+        <CurrentWeather  fake={fake}/>
+        <WeatherToday fake = {fake}/>
+      </main>
+    </div>
+  );
 }
-
 
 export default App;
