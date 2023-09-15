@@ -1,21 +1,26 @@
-import React from "react";
-import { useState } from "react";
- 
-function Nav(props) {
-    const [input,setInput]=useState("")
-    const handleButtonClick = () => {
-        console.log("Button in child component was clicked!");
-        
-      }
-    return (
-        <header>
-        <label for="search" ></label>
-        <input type="text" id="name" name="name" placeholder="Enter the city" onChange={e=>setInput(e.target.value)} />
-        <button className="btn" onClick={()=>props.setCity(input)} >FIND WEATHER</button>
-        </header>
-    )
-}
+// import React, { useState } from "react";
+// import "./Search.css";
+
+// function Search(props) {
+
+//   const [inputValue, setInputValue] = useState('');
+
+//   const handleInputChange = (e) => {
+//     const value = e.target.value;
+//     setInputValue(value);
+//     props.onInputChange(value);
+//   };
 
 
+//   return(
+//     <div className="search">
+//       <header>
+//         <input type="text" name="city" id="city" placeholder="Type in a city name" value={inputValue} onChange={handleInputChange} />
+//         <input class="btn" type="submit" value="FIND WEATHER" onClick={props.onClick}></input>
+//       </header>
 
-export default Nav 
+//     </div>
+//   )
+// }
+
+// export default Search;

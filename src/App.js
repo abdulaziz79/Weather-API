@@ -1,58 +1,102 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import Search from "./components/Search";
-
-import SayHi, { SayHello } from "./components/WeatherItem";
-import fakeWeatherData from "./fakeWeatherData.json";
-import mostlycloudy from './img/weather-icons/mostlycloudy.svg';
-import cloudy from './img/weather-icons/cloudy.svg';
-import clear from './img/weather-icons/clear.svg';
-import Nav from "./components/Nav";
-import "./App.css";
-import CurrentWeather from "./components/CurrentWeather";
-import { useState, useEffect } from "react";
-
-import WeatherToday from "./components/WeatherToday";
-import FakeWeather from "./FakeWeather.json"
-
-let key="02eb9745653a424c9b2485f7912d01b8"
-
-
+import { CurrentWeather, WeatherItem } from "./components/WeatherItem"
+import Loading from "./components/Loading";
 
 function App() {
-  const [city, setCity]=useState("Tripoli")
-  const [data, setData]=useState({})
-  const apiKey="02eb9745653a424c9b2485f7912d01b8"
-  const apiUrl=`http://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=8&units=metric&appid=${apiKey}`
 
-  const myFunc= async()=>{
-    await fetch(apiUrl)
-    .then(response => {
+ 
+
+    const [isLoading,setIsLoading]=useState(false);
+
+    const [inputValue, setInputValue] = useState("Moscow");
+
+    const [showData,setShowData]=useState(null);
+
+  
+
+    const [isFound,setIsFound]=useState(true);
+
+  
+
+
+  const API_KEY="02eb9745653a424c9b2485f7912d01b8";
+
+  const url = `http://api.openweathermap.org/data/2.5/forecast?q=${inputValue}&cnt=8&units=metric&appid=${API_KEY}`;
+  
+  const handleSearch = async() => {
+  
+    setIsLoading(true)
+
+   
+    await fetch(url)
+
+    .then((response) => {
+
       if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json(); // Parse the response as JSON
-    })
-    .then(parsedData => setData(parsedData)) // Set the parsed JSON data into the state
-    .catch(error => console.error("error fetching weather data", error));
+        throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((showData) => {
+      
+        setShowData(showData);
+
+        setIsLoading(false)
+
+      
+      })
+      .catch((error) => {
+        console.error("Error fetching weather data:", error);
+      
+        setIsLoading(false)
+
+        setIsFound(false)
+
+      });
+  };
+  useEffect(() => {
+    if (setIsLoading) {
+      handleSearch();
+    }
+  }, [])
 
 
-  }
+  const handleInputValueChange = (value) => {
+    setInputValue(value);
+  };
 
-  useEffect(()=>{
-   myFunc()
-
-    
-  },[city])
 
   return (
     <div className="app">
-      <Nav setCity={setCity} />
-      <main>
-        <CurrentWeather  data={data}/>
-        { <WeatherToday data = {data}/> }
-      </main>
-    </div>
-  );
+      <Search onClick={handleSearch} onInputChange={handleInputValueChange} />
+
+      {showData && !isLoading && isFound?  (
+      <div className="main">
+    
+   
+      <CurrentWeather showData={showData}/>
+
+      <WeatherItem showData={showData}/> 
+      
+      </div> 
+      ) : !isFound && !isLoading?(
+
+        <div className="main">
+
+      <CurrentWeather showData={null}/>
+      </div>
+      
+      ) :
+      <div className="main">
+
+      <Loading/>
+</div>
+     }
+      </div>
+
+
+  )
 }
 
 export default App;
